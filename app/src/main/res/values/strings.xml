@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Touran</string>
+    <string name="home">Home</string>
+    <string name="Explorez">Explorez</string>
+    <string name="ouahran_elbahia">Ouahran Al Bahia!</string>
+    <string name="search_places">Rechercher des lieux</string>
+    <string name="categories">Categories</string>
+    <string name="nourriture">Nourriture</string>
+    <string name="culture">Culture</string>
+    <string name="shopping">Shopping</string>
+    <string name="Enterntainement">Divertissement</string>
+    <string name="nature">Nature</string>
+    <string name="name">Name</string>
+    <string name="coordinates">Coordinates</string>
+    <string name="profile">Profil</string>
+    <string name="map">Carte</string>
+    <string name="Bus">Bus</string>
+    <string name="budget">Budget</string>
+
+
+</resources>

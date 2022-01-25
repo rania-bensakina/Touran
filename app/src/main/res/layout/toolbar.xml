@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.google.android.material.appbar.MaterialToolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar"
+    android:background="@color/white"
+    app:contentInsetStart="0dp"
+    android:paddingEnd="13dp"
+    android:paddingStart="13dp"
+    android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
+    >
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+
+    <ImageButton
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:src="@drawable/ic_launcher_background"
+        android:tint="@color/black"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:backgroundTint="@color/white"
+        android:id="@+id/options"
+        />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/reallygrey">
+            <ImageButton
+
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:src="@drawable/ic_launcher_background"
+                android:tint="@color/colorPrimary"
+                android:layout_alignParentEnd="true"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:backgroundTint="@color/white"
+                android:id="@+id/notification"/>
+            <TextView
+                android:id="@+id/textOne"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/notification"
+                android:layout_alignEnd="@id/notification"
+                android:text="00"
+                android:textColor="#FFF"
+                android:textSize="16sp"
+                android:fontFamily="@font/extra_bold"
+                android:background="@drawable/badge"/>
+        </RelativeLayout>
+    </RelativeLayout>
+
+</com.google.android.material.appbar.MaterialToolbar>
+
