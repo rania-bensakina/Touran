@@ -21,10 +21,10 @@
             android:layout_height="170dp">
             <ImageView
                 android:id="@+id/place_image"
-
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="fitXY"
+                android:transitionName="image_small"
                 app:srcCompat="@drawable/oran" />
 
 

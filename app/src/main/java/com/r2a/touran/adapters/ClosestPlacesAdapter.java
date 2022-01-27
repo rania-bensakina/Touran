@@ -1,15 +1,27 @@
 package com.r2a.touran.adapters;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.view.ViewCompat;
+import androidx.navigation.Navigator;
+import androidx.navigation.fragment.FragmentNavigator;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.common.internal.Constants;
+import com.r2a.touran.HomeActivity;
+import com.r2a.touran.PlaceInfoActivity;
 import com.r2a.touran.data.Place;
 import com.r2a.touran.R;
 
@@ -19,7 +31,7 @@ public class ClosestPlacesAdapter extends RecyclerView.Adapter<ClosestPlacesAdap
     private static ClickListener clickListener;
         // List with Place type
         private List<Place> list;
-
+Activity activity;
         // View Holder class which
         // extends RecyclerView.ViewHolder
         public class MyView extends RecyclerView.ViewHolder  implements View.OnClickListener, View.OnLongClickListener{
@@ -63,9 +75,10 @@ public class ClosestPlacesAdapter extends RecyclerView.Adapter<ClosestPlacesAdap
     }
         // Constructor for adapter class
         // which takes a list of place type
-            public ClosestPlacesAdapter(List<Place> horizontalList)
+            public ClosestPlacesAdapter(Activity activity ,List<Place> horizontalList)
         {
             this.list = horizontalList;
+            this.activity= activity;
         }
 
         // Override onCreateViewHolder which deals
@@ -88,10 +101,26 @@ public class ClosestPlacesAdapter extends RecyclerView.Adapter<ClosestPlacesAdap
         }
 
     @Override
-    public void onBindViewHolder(@NonNull MyView holder, int position) {
+    public void onBindViewHolder(@NonNull MyView holder, @SuppressLint("RecyclerView") int position) {
         holder.name.setText(list.get(position).getName());
         holder.coordinates.setText(String.format("%s , %s" , list.get(position).getLongitude(),list.get(position).getLatitude()));
       //  holder.placeImage.(list.get(position).getName());
+
+        holder.placeImage.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+            @Override
+            public void onClick(View v) {
+               // Toast.makeText(v.getContext(), "hellllo", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(v.getContext(), PlaceInfoActivity.class);
+    ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(activity,holder.placeImage,"image_small");
+                intent.putExtra("name", list.get(position).getName());
+                intent.putExtra("description", list.get(position).getDescription());
+                intent.putExtra("longitude", list.get(position).getLongitude());
+                intent.putExtra("latitude", list.get(position).getLatitude());
+
+                v.getContext().startActivity(intent, optionsCompat.toBundle());
+            }
+        });
     }
 
 

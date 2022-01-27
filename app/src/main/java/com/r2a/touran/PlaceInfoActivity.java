@@ -16,6 +16,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
+import android.transition.TransitionInflater;
+import android.view.animation.Animation;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -35,6 +37,7 @@ public class PlaceInfoActivity extends AppCompatActivity implements OnMapReadyCa
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
 
         PlaceInfoActivityBinding binding;
+        @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
         @Override
         protected void onCreate (Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -44,7 +47,6 @@ public class PlaceInfoActivity extends AppCompatActivity implements OnMapReadyCa
             binding.description.setText(extras.getString("name"));
             String price = extras.getString("descrition");
             Place place = new Place("gyguy",SHOPPING,35.693403,-0.626094);
-
         } else System.out.println("NO INTENT");
 
 

@@ -67,7 +67,8 @@
                     >
 
                     <ImageView
-                        android:id="@+id/placeimage"
+                        android:id="@+id/place_image"
+                        android:transitionName="image_small"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/oran"

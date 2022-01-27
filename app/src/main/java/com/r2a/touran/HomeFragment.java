@@ -101,7 +101,7 @@ public class HomeFragment extends Fragment {
                 getActivity().getApplicationContext());
         binding.closestPlaces.setLayoutManager(
                 RecyclerViewLayoutManager);
-        adapter = new ClosestPlacesAdapter(placeArrayList);
+        adapter = new ClosestPlacesAdapter(getActivity(),placeArrayList);
         HorizontalLayout
                 = new LinearLayoutManager(
                 getContext(),
