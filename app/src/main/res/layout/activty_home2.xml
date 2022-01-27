@@ -20,20 +20,20 @@
 
         <FrameLayout
             android:id="@+id/drawer_frame"
-            android:layout_below="@+id/toolbar"
-            android:layout_above="@id/bottom_bar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_above="@id/bottom_bar"
+            android:layout_below="@+id/toolbar" />
 
         <nl.joery.animatedbottombar.AnimatedBottomBar
             android:id="@+id/bottom_bar"
             android:background="#FFF"
-            app:abb_indicatorColor="@color/black"
+            app:abb_indicatorColor="@color/colorSecondary"
             app:abb_badgeTextColor="@color/white"
-            app:abb_iconSize="50dp"
+            app:abb_iconSize="40dp"
             app:abb_badgeBackgroundColor="@color/colorPrimary"
             app:abb_textAppearance="@style/CustomText"
-            app:abb_tabColorSelected="@color/black"
+            app:abb_tabColorSelected="@color/colorSecondary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:abb_selectedTabType="text"
@@ -42,7 +42,7 @@
             app:abb_indicatorMargin="16dp"
             app:abb_indicatorHeight="4dp"
             app:abb_tabs="@menu/tabs"
-            app:abb_selectedIndex="1"
+            app:abb_selectedIndex="0"
             android:layout_alignParentBottom="true"
             app:abb_rippleEnabled="true" />
     </RelativeLayout>

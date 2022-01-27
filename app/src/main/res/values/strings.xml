@@ -17,6 +17,26 @@
     <string name="Bus">Bus</string>
     <string name="budget">Budget</string>
     <string name="seeall">Voir Tout</string>
+    <string name="voirsurmap">Voir sur Map</string>
+    <string name="distance">Distance</string>
+    <string name="description">Decription</string>
+    <string name="stars">Etoiles</string>
+    <string name="ratings">Etoiles</string>
+    <string name="generertext">Générer un Planning</string>
+    <string name="nbrdays">Nombre de journées</string>
+    <string name="nbrpersons">Nombre de personnes</string>
+    <string name="yourbudget">Votre budget</string>
+    <string name="clicktoexclude">Cliquez sur les activités par priorité</string>
+    <string name="resto">Restaurant</string>
+    <string name="zoo">Zoo</string>
+    <string name="Shopping">Etoiles</string>
+    <string name="parc">Pard</string>
+    <string name="cinema">Cinema</string>
+    <string name="siteshistoriques">Sites Historique</string>
+    <string name="uchose">Vous aver choisi </string>
+    <string name="generer">Génerer</string>
+
+
 
 
 </resources>

@@ -1,20 +1,15 @@
 package com.r2a.touran;
 
-import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.ViewModelProvider;
+import static com.r2a.touran.data.Place.PlaceType.CULTURE;
+import static com.r2a.touran.data.Place.PlaceType.SHOPPING;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -23,15 +18,24 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.RelativeLayout;
 
-import com.r2a.touran.Adpters.ClosestPlacesAdapter;
-import com.r2a.touran.Data.Place;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.r2a.touran.adapters.ClosestPlacesAdapter;
+import com.r2a.touran.data.Place;
+import com.r2a.touran.viewmodels.HomeViewModel;
 import com.r2a.touran.databinding.HomeFragmentBinding;
 
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
 
-    ArrayList <String> placesList = new ArrayList<>();
+    ArrayList<String> placesList = new ArrayList<>();
     RecyclerView.LayoutManager RecyclerViewLayoutManager;
     ClosestPlacesAdapter adapter;
     LinearLayoutManager HorizontalLayout;
@@ -55,39 +59,26 @@ public class HomeFragment extends Fragment {
                 inflater, R.layout.home_fragment, container, false);
         View view = binding.getRoot();
 
-        view.setOnTouchListener(new View.OnTouchListener() {
-            public boolean onTouch(View v, MotionEvent event) {
-
-                if (event.getAction() == MotionEvent.ACTION_MOVE) {
-                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.
-                            INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
-                    adapter.notifyDataSetChanged();
-                }
-                return true;
-            }
-        });
-
 
         ArrayList<Place> placeArrayList = new ArrayList<Place>();
-        Place place = Place.builder().name("hahha").type(Place.PlaceType.CULTURE).location(new Point(22, 30)).build();
+        Place place =new  Place("hahha", CULTURE, 22.00,-5.4);
         placeArrayList.add(place);
-        Place place1 = Place.builder().name("hahhdfgrga").type(Place.PlaceType.CULTURE).location(new Point(2, 4)).build();
+        Place place1 = new Place("hahhdfgrga",CULTURE,30.00,-12.25);
         placeArrayList.add(place1);
-        Place place2 = Place.builder().name("hargeghha").type(Place.PlaceType.DIVERTISSEMENT).location(new Point(30, 2)).build();
+        Place place2 = new Place("gyguy",SHOPPING,30.00,-12.25);
         placeArrayList.add(place2);
-        Place place3 = Place.builder().name("hugyuahha").type(Place.PlaceType.CULTURE).location(new Point(30, 30)).build();
+   /*     Place place3 = Place.builder().name("hugyuahha").type(CULTURE).longitude(40.00).latitude(-100.55).build();
         placeArrayList.add(place3);
-        Place place4 = Place.builder().name("hhgeyzfguahha").type(Place.PlaceType.CULTURE).location(new Point(10, 12)).build();
+        Place place4 = Place.builder().name("hhgeyzfguahha").type(CULTURE).longitude(12.00).latitude(200.5).build();
         placeArrayList.add(place4);
-        Place place5 = Place.builder().name("hguhiuhiahha").type(Place.PlaceType.NATURE).location(new Point(40, 50)).build();
+        Place place5 = Place.builder().name("hguhiuhiahha").type(Place.PlaceType.NATURE).longitude(512.23).latitude(-121.25).build();
         placeArrayList.add(place5);
-        Place place6 = Place.builder().name("hahuugbjbhha").type(Place.PlaceType.CULTURE).location(new Point(31, 30)).build();
+        Place place6 = Place.builder().name("hahuugbjbhha").type(CULTURE).longitude(230.00).latitude(-1542.25).build();
         placeArrayList.add(place6);
-        Place place7 = Place.builder().name("haygugiuhha").type(Place.PlaceType.SHOPPING).location(new Point(18, 20)).build();
+        Place place7 = Place.builder().name("haygugiuhha").type(Place.PlaceType.SHOPPING).longitude(10.00).latitude(-125.25).build();
         placeArrayList.add(place7);
-        Place place8 = Place.builder().name("hauguygiuhha").type(Place.PlaceType.SHOPPING).location(new Point(50, 60)).build();
-        placeArrayList.add(place8);
+        Place place8 = Place.builder().name("hauguygiuhha").type(Place.PlaceType.SHOPPING).longitude(13.00).latitude(-200.00).build();
+        placeArrayList.add(place8);*/
 
         for (int i = 0; i < placeArrayList.size(); i++) {
             final Place placei = placeArrayList.get(i);
@@ -96,11 +87,14 @@ public class HomeFragment extends Fragment {
         }
 
         ArrayAdapter<String> adaptername = new ArrayAdapter<String>(getContext(), R.layout.row_places, placesList);
-
         binding.searchView.setAdapter(adaptername);
         binding.searchView.setThreshold(2);
         binding.searchView.setOnItemClickListener((adapterView, view12, j, l) -> {
             String finalnom = binding.searchView.getText().toString();
+            Intent intent = new Intent(getActivity(), PlaceInfoActivity.class);
+            intent.putExtra("name", finalnom);
+            startActivity(intent);
+            // intent.putExtra("description",p.getDescription());
         });
         RecyclerViewLayoutManager
                 = new LinearLayoutManager(
@@ -115,6 +109,17 @@ public class HomeFragment extends Fragment {
                 false);
         binding.closestPlaces.setLayoutManager(HorizontalLayout);
         binding.closestPlaces.setAdapter(adapter);
+        adapter.setOnItemClickListener(new ClosestPlacesAdapter.ClickListener() {
+            @Override
+            public void onItemClick(int position, View v) {
+                Log.d("TAG", "onItemClick position: " + position);
+            }
+
+            @Override
+            public void onItemLongClick(int position, View v) {
+                Log.d("TAG", "onItemLongClick pos = " + position);
+            }
+        });
 
 
         binding.cfood.setOnClickListener(new View.OnClickListener() {
@@ -151,18 +156,23 @@ public class HomeFragment extends Fragment {
     }
 
 
-
-
-    public void changeColorWhenClicked(RelativeLayout relativeLayout){
+    public void changeColorWhenClicked(RelativeLayout relativeLayout) {
         ColorDrawable viewColor = (ColorDrawable) relativeLayout.getBackground();
         int colorId = viewColor.getColor();
-        if(colorId == Color.parseColor("#f39149"))
+        if (colorId == Color.parseColor("#f39149"))
             relativeLayout.setBackgroundColor(Color.parseColor("#FFFFFFFF"));
         else
             relativeLayout.setBackgroundColor(Color.parseColor("#f39149"));
 
     }
 
+    public void openPlaceInfos(Place p) {
+        Intent intent = new Intent(getActivity(), PlaceInfoActivity.class);
+        startActivity(intent);
+        intent.putExtra("name", p.getName());
+        intent.putExtra("description", p.getDescription());
+
+    }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {

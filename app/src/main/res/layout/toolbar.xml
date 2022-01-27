@@ -7,8 +7,6 @@
     android:id="@+id/toolbar"
     android:background="@color/reallygrey"
     app:contentInsetStart="0dp"
-    android:paddingEnd="13dp"
-    android:paddingStart="13dp"
     android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
     >
     <RelativeLayout
@@ -16,40 +14,43 @@
         android:layout_height="wrap_content">
 
 
-    <ImageButton
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:src="@drawable/ic_launcher_background"
-        android:tint="@color/black"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:backgroundTint="@color/white"
-        android:id="@+id/options"
-        />
+        <ImageButton
+            android:id="@+id/options"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginTop="10dp"
+            android:layout_centerVertical="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:backgroundTint="@color/white"
+            android:src="@drawable/ic_baseline_format_list_bulleted_24"
+            app:tint="@color/black" />
+
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/reallygrey">
-            <ImageButton
 
+            <ImageButton
+                android:id="@+id/notification"
                 android:layout_width="56dp"
                 android:layout_height="56dp"
-                android:src="@drawable/ic_launcher_background"
-                android:tint="@color/colorPrimary"
                 android:layout_alignParentEnd="true"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="10dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:backgroundTint="@color/white"
-                android:id="@+id/notification"/>
+                android:src="@drawable/ic_baseline_notifications_24" />
+
             <TextView
                 android:id="@+id/textOne"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@id/notification"
                 android:layout_alignEnd="@id/notification"
+                android:background="@drawable/badge"
+                android:fontFamily="@font/extra_bold"
                 android:text="00"
                 android:textColor="#FFF"
-                android:textSize="16sp"
-                android:fontFamily="@font/extra_bold"
-                android:background="@drawable/badge"/>
+                android:textSize="10sp" />
         </RelativeLayout>
     </RelativeLayout>
 

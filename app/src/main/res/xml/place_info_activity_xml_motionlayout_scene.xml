@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:motion="http://schemas.android.com/tools">
+
+    <Transition
+        app:constraintSetEnd="@layout/place_info_activity_finish"
+        app:constraintSetStart="@layout/place_info_activity">
+        <OnClick app:targetId="@+id/voiSurMap" app:dragDirection="dragUp" />
+    </Transition>
+    <Transition
+        app:constraintSetEnd="@layout/place_info_activity"
+        app:constraintSetStart="@layout/place_info_activity_finish">
+        <OnClick app:targetId="@+id/voiSurMap" app:dragDirection="dragDown" />
+    </Transition>
+
+</MotionScene>

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutDescription="@xml/place_info_activity_xml_motionlayout_scene">
+        <fragment
+            android:id="@+id/maplace"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/grabmetohide"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+        <ImageButton
+            android:id="@+id/backtoHome"
+            android:backgroundTint="@color/white"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_margin="34dp"
+            android:background="@drawable/round_corners"
+            android:elevation="5dp"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/arrow_back"
+            android:tint="@color/colorPrimary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:background="@drawable/oran"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="500dp"
+
+                android:padding="40dp">
+
+                <ImageButton
+                    android:id="@+id/likeButton"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:background="@drawable/round_corners"
+                    android:elevation="5dp"
+                    android:tint="@color/colorPrimary"
+                    android:foreground="?attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/thumbs_up"
+                    android:layout_alignParentEnd="true" />
+
+
+                <LinearLayout
+                    android:layout_alignParentBottom="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:lines="2"
+                        android:text="@string/name"
+                        android:textColor="@color/white"
+                        android:textSize="40dp"
+                        android:fontFamily="@font/extra_bold"
+                        android:layout_alignParentBottom="true"/>
+
+                    <TextView
+                        android:id="@+id/ratings"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_above="@+id/name"
+                        android:layout_alignParentBottom="true"
+                        android:drawableStart="@drawable/ic_baseline_star_24"
+                        android:fontFamily="@font/extra_bold"
+                        android:text="@string/ratings"
+                        android:textColor="@color/white"
+                        android:textSize="20dp" />
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/infos"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#8A070707"
+                android:orientation="vertical">
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_margin="@dimen/start"
+                            android:layout_marginLeft="40dp"
+                            android:fontFamily="@font/extra_bold"
+                            android:text="@string/description"
+                            android:textColor="#fff"
+                            android:textSize="22dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/description"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/start"
+                            android:fontFamily="@font/medium"
+                            android:text="The heavenly land built with love\nand magic"
+                            android:textColor="#fff"
+                            android:textSize="18dp" />
+                    </LinearLayout>
+
+                </ScrollView>
+
+
+                <Button
+                    android:id="@+id/voiSurMap"
+                    android:layout_width="240dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="20dp"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:fontFamily="@font/extra_bold"
+                    android:text="@string/voirsurmap"
+                    android:textColor="#fff"
+                    android:textSize="14dp" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.constraintlayout.motion.widget.MotionLayout>
+</layout>

@@ -1,13 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context=".BudgetFragment">
-
     <TextView
+        android:id="@+id/text"
+        android:layout_below="@+id/toolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/start"
+        android:text="@string/generertext"
+        android:textColor="@color/black"
+        android:fontFamily="@font/extra_bold"
+        android:textSize="30dp"/>
+    <LinearLayout
+        android:layout_below="@+id/text"
+        android:id="@+id/info"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="15dp">
 
-</FrameLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+
+            style="@style/BoxStyle"
+
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/nbrdays"
+
+                android:importantForAutofill="no"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/nbrdays"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/BoxStyle"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/nbrpeoeple"
+                android:layout_width="match_parent"
+                android:importantForAutofill="no"
+                android:textColorHint="@color/black"
+                android:layout_height="wrap_content"
+                android:hint="@string/nbrpersons"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/BoxStyle"
+                android:layout_marginTop="10dp"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tab_budget"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:clickable="false"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:text="@string/yourbudget"
+                    android:inputType="number" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+    <TextView
+        android:id="@+id/text2"
+        android:layout_below="@+id/info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/start"
+        android:text="@string/clicktoexclude"
+        android:textColor="@color/black"
+        android:fontFamily="@font/extra_bold"
+        android:textSize="20dp"/>
+    <com.google.android.material.chip.ChipGroup
+        android:layout_below="@+id/text2"
+        android:id="@+id/chipGroup"
+        style="@style/BoxStyle"
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/resto"/>
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/nature"/>
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/shopping"/>
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/culture"/>
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Enterntainement"/>
+
+    </com.google.android.material.chip.ChipGroup>
+
+        <TextView
+            android:id="@+id/text3"
+            android:layout_below="@+id/chipGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/start"
+            android:text="@string/uchose"
+            android:textColor="@color/black"
+            android:fontFamily="@font/extra_bold"
+            android:textSize="20dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/text3"
+            android:layout_height="150dp"/>
+<Button
+    android:layout_below="@+id/recycler"
+    android:id="@+id/generer"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:backgroundTint="@color/colorPrimary"
+    android:text="@string/generer"
+    android:textColor="@color/black"
+    />
+
+
+</RelativeLayout>

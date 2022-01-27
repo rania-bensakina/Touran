@@ -1,33 +1,32 @@
-package com.r2a.touran.Adpters;
+package com.r2a.touran.adapters;
 
 import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.r2a.touran.Data.Place;
+import com.r2a.touran.data.Place;
 import com.r2a.touran.R;
 
 import java.util.List;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
 public class ClosestPlacesAdapter extends RecyclerView.Adapter<ClosestPlacesAdapter.MyView> {
-
-        // List with String type
+    private static ClickListener clickListener;
+        // List with Place type
         private List<Place> list;
 
         // View Holder class which
         // extends RecyclerView.ViewHolder
-        public class MyView extends RecyclerView.ViewHolder {
+        public class MyView extends RecyclerView.ViewHolder  implements View.OnClickListener, View.OnLongClickListener{
 
             // Text View
             TextView name,coordinates;
-            CircleImageView placeImage;
+            ImageView placeImage;
 
             // parameterised constructor for View Holder class
             // which takes the view as a parameter
@@ -40,11 +39,28 @@ public class ClosestPlacesAdapter extends RecyclerView.Adapter<ClosestPlacesAdap
                 name = (TextView)view
                         .findViewById(R.id.name);
                 coordinates = (TextView)view
-                        .findViewById(R.id.coordinates);
-                placeImage = (CircleImageView)view.findViewById(R.id.place_image);
+                        .findViewById(R.id.coodinates);
+                placeImage = (ImageView)view.findViewById(R.id.place_image);
+            }
+
+            @Override
+            public void onClick(View view) {
+                clickListener.onItemClick(getAdapterPosition(), view);
+            }
+
+            @Override
+            public boolean onLongClick(View view) {
+                return false;
             }
         }
+    public void setOnItemClickListener(ClickListener clickListener) {
+        ClosestPlacesAdapter.clickListener = clickListener;
+    }
 
+    public interface ClickListener {
+        void onItemClick(int position, View v);
+        void onItemLongClick(int position, View v);
+    }
         // Constructor for adapter class
         // which takes a list of place type
             public ClosestPlacesAdapter(List<Place> horizontalList)
@@ -56,8 +72,7 @@ public class ClosestPlacesAdapter extends RecyclerView.Adapter<ClosestPlacesAdap
         // with the inflation of the card layout
         // as an item for the RecyclerView.
         @Override
-        public MyView onCreateViewHolder(ViewGroup parent,
-                                         int viewType)
+        public MyView onCreateViewHolder(ViewGroup parent,int viewType)
         {
 
             // Inflate item.xml using LayoutInflator
@@ -75,7 +90,7 @@ public class ClosestPlacesAdapter extends RecyclerView.Adapter<ClosestPlacesAdap
     @Override
     public void onBindViewHolder(@NonNull MyView holder, int position) {
         holder.name.setText(list.get(position).getName());
-        holder.coordinates.setText(String.format("%s , %s" , list.get(position).getLocation().x,list.get(position).getLocation().y));
+        holder.coordinates.setText(String.format("%s , %s" , list.get(position).getLongitude(),list.get(position).getLatitude()));
       //  holder.placeImage.(list.get(position).getName());
     }
 

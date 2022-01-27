@@ -1,58 +1,67 @@
-<androidx.cardview.widget.CardView android:layout_width="300dp"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="20dp"
+<androidx.cardview.widget.CardView android:id="@+id/amritsar_home"
+    android:layout_width="match_parent"
+    android:layout_height="220dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
     app:cardCornerRadius="20dp"
-    android:layout_gravity="center_horizontal"
-    app:cardElevation="10dp"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    app:cardElevation="20dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/place_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/oran" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom"
+        android:background="#99FFFFFF"
         android:orientation="vertical">
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/place_image"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginTop="10dp"
-            android:src="@drawable/place" />
 
         <TextView
             android:id="@+id/name"
-            android:layout_gravity="start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
             android:fontFamily="@font/extra_bold"
+            android:gravity="center"
+            android:text="Amritsar"
             android:textColor="@color/black"
-            android:text="@string/name"
             android:textSize="20sp" />
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="5dp"
-    android:layout_gravity="start"
-    android:layout_marginStart="10dp"
-    android:layout_marginBottom="7dp">
-    <ImageView
-        android:layout_toLeftOf="@id/coordinates"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/place"
-        />
-    <TextView
-        android:id="@+id/coordinates"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:text="@string/coordinates"
-        android:gravity="center"
-        android:textSize="10sp" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/coodinates"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/place"
+            android:fontFamily="@font/medium"
+            android:gravity="center"
+            android:text="Amritsar"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
     </LinearLayout>
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="48dp"
+        android:clickable="true"
+        android:layout_height="48dp"
+        android:backgroundTint="@color/reallygrey"
+        android:layout_gravity="right"
+        android:layout_margin="10dp"
+        app:cardCornerRadius="48dp">
+
+        <ImageView
+            android:id="@+id/like"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center"
+            android:background="@drawable/thumbs_up" />
+    </androidx.cardview.widget.CardView>
 </androidx.cardview.widget.CardView>

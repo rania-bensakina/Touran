@@ -12,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.r2a.touran.viewmodels.ProfilViewModel;
+
 public class ProfilFragment extends Fragment {
 
     private ProfilViewModel mViewModel;

@@ -1,7 +1,5 @@
 package com.r2a.touran;
 
-import androidx.lifecycle.ViewModelProvider;
-
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,6 +9,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.r2a.touran.viewmodels.BusViewModel;
 
 public class BusFragment extends Fragment {
 
@@ -26,11 +26,6 @@ public class BusFragment extends Fragment {
         return inflater.inflate(R.layout.bus_fragment, container, false);
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(BusViewModel.class);
-        // TODO: Use the ViewModel
-    }
+
 
 }
