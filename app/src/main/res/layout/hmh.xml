@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/oran">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:padding="40dp">
+
+            <ImageButton
+                android:id="@+id/backtosearch"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:elevation="5dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/thumbs_up"
+                android:tint="@color/colorPrimary"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/round_corners"
+                />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/thumbsup"
+                android:layout_alignParentRight="true"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:clickable="true"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="10dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="wrap_content"
+                    android:layout_toLeftOf="@+id/food"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center_vertical"
+                    android:layout_height="wrap_content"
+
+                    android:src="@drawable/thumbs_up" />
+
+            </androidx.cardview.widget.CardView>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#8A070707"
+            android:orientation="vertical"
+            android:layout_marginTop="100dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/ditance"
+                    android:layout_width="100dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/star"
+                    android:layout_marginLeft="37dp"
+                    android:layout_marginTop="20dp" />
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_toRightOf="@id/ditance"
+                    android:layout_height="20dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_gravity=""
+                    android:src="@drawable/star"
+                    android:layout_marginTop="20dp" />
+            </RelativeLayout>
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="150dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="@string/description"
+                        android:textColor="#fff"
+                        android:textSize="22dp"
+                        android:layout_margin="@dimen/start"
+                        android:fontFamily="@font/extra_bold"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="40dp" />
+
+                    <TextView
+                        android:id="@+id/description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/medium"
+                        android:text="The heavenly land built with love\nand magic"
+                        android:textColor="#fff"
+                        android:textSize="18dp"
+                        android:layout_marginStart="@dimen/start" />
+                </LinearLayout>
+
+            </ScrollView>
+
+
+            <Button
+                android:layout_width="240dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_height="50dp"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="@string/voirsurmap"
+                android:fontFamily="@font/extra_bold"
+                android:layout_marginTop="20dp"
+                android:textSize="14dp"
+                android:textColor="#fff" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>
