@@ -7,7 +7,6 @@
     tools:context=".BudgetFragment">
     <TextView
         android:id="@+id/text"
-        android:layout_below="@+id/toolbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/start"
@@ -35,7 +34,6 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/nbrdays"
-
                 android:importantForAutofill="no"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -62,19 +60,17 @@
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/BoxStyle"
                 android:layout_marginTop="10dp"
-
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/tab_budget"
-                    android:layout_width="wrap_content"
+                    android:layout_width="196dp"
+                    android:gravity="center"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:clickable="false"
-                    android:cursorVisible="false"
-                    android:focusable="false"
-                    android:focusableInTouchMode="false"
-                    android:text="@string/yourbudget"
+                    android:hint="@string/yourbudget"
+                    android:importantForAutofill="no"
                     android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
 
