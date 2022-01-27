@@ -5,13 +5,13 @@
 
     <Transition
         app:constraintSetEnd="@layout/place_info_activity_finish"
-        app:constraintSetStart="@layout/place_info_activity">
-        <OnClick app:targetId="@+id/voiSurMap" app:dragDirection="dragUp" />
+        app:constraintSetStart="@layout/place_info_activity_start">
+        <OnClick app:targetId="@+id/voiSurMap" app:dragDirection="dragDown" />
     </Transition>
     <Transition
-        app:constraintSetEnd="@layout/place_info_activity"
+        app:constraintSetEnd="@layout/place_info_activity_start"
         app:constraintSetStart="@layout/place_info_activity_finish">
-        <OnClick app:targetId="@+id/voiSurMap" app:dragDirection="dragDown" />
+        <OnSwipe app:touchAnchorId="@+id/grabmetohide" app:dragDirection="dragUp"/>
     </Transition>
 
 </MotionScene>
