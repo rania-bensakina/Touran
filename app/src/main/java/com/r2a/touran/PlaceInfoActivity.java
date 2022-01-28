@@ -21,9 +21,11 @@ import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.transition.TransitionInflater;
+import android.util.Log;
 import android.view.animation.Animation;
 import android.widget.Toast;
 
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -38,41 +40,49 @@ import com.r2a.touran.databinding.PlaceInfoActivityBinding;
 import java.util.TimeZone;
 
 
-public class PlaceInfoActivity extends AppCompatActivity implements OnMapReadyCallback{
+public class PlaceInfoActivity extends AppCompatActivity implements OnMapReadyCallback {
     GoogleMap map;
     Place place;
-    Double longitude,latitude;
+    Double longitude, latitude;
     String name;
     private boolean locationPermissionGranted;
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
 
-        PlaceInfoActivityBinding binding;
-        @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-        @Override
-        protected void onCreate (Bundle savedInstanceState){
+    PlaceInfoActivityBinding binding;
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.place_info_activity);
         if (this.getIntent() != null) {
             Bundle extras = this.getIntent().getExtras();
-          name =  extras.getString("name");
+            name = extras.getString("name");
             binding.description.setText(name);
             String price = extras.getString("description");
-          longitude=  extras.getDouble("longitude");
-             latitude= extras.getDouble("latitude");//  place = new Place("gyguy",SHOPPING,35.693403,-0.626094);
-        } else System.out.println("NO INTENT");
+            longitude = extras.getDouble("longitude");
+            latitude = extras.getDouble("latitude");//  place = new Place("gyguy",SHOPPING,35.693403,-0.626094);
+            // Build the map.
+            SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.maplace);
+            if (mapFragment != null) {
+                mapFragment.getMapAsync(this);
+            }
+        } else Log.e("error","NO INTENT");
 
 
         binding.backtoHome.setOnClickListener((v) -> finish());
-        }
-
+    }
 
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
-    public void onMapReady(@NonNull GoogleMap googleMap) {
+    public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
-        getLocationPermission();
+        if (map != null) {
+            enableMyLocation();
+        }
+
     }
 
 
@@ -80,42 +90,23 @@ public class PlaceInfoActivity extends AppCompatActivity implements OnMapReadyCa
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode==100 && grantResults.length>0 && grantResults[0]+ grantResults[1]== PackageManager.PERMISSION_GRANTED){
-            System.out.println("this is happening");
-            Toast.makeText(this, "HIIII", Toast.LENGTH_SHORT).show();
-            getPlacePosition(longitude,latitude);
-        }else   Toast.makeText(this, "GIVE ME ACCESS", Toast.LENGTH_SHORT).show();
+        if (requestCode == 100 && grantResults.length > 0 && grantResults[0] + grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+            getPlacePosition(longitude, latitude);
+        } else Toast.makeText(this, "We need your location for this feature", Toast.LENGTH_SHORT).show();
     }
 
 
 
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    @SuppressWarnings("deprecation")
-    private void getLocationPermission() {
-        /*
-         * Request location permission, so that we can get the location of the
-         * device. The result of the permission request is handled by a callback,
-         * onRequestPermissionsResult.
-         */
-        if (ContextCompat.checkSelfPermission(this,
-                android.Manifest.permission.ACCESS_FINE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED) {
-            locationPermissionGranted = true;
-        } else {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
-                    PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
-        }
-    }
     private void enableMyLocation() {
+
         // [START maps_check_location_permission]
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             if (map != null) {
                 map.setMyLocationEnabled(true);
-                System.out.println("hiiii "+longitude);
-                getPlacePosition(longitude,latitude);
+                getPlacePosition(longitude, latitude);
             }
         } else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -125,20 +116,24 @@ public class PlaceInfoActivity extends AppCompatActivity implements OnMapReadyCa
             }
         }
     }
-    public void getPlacePosition(Double longitude,Double latitude) {
 
-            if (latitude != null && longitude!= null ) {
-                LatLng pha = new LatLng(latitude, longitude);
-                map.addMarker(new MarkerOptions()
-                        .position(pha)
-                        .title(name).icon(BitmapFromVector(getApplicationContext(), R.drawable.touran_logo)));
-                //  map.moveCamera(CameraUpdateFactory.newLatLng(pha));
-                map.animateCamera(CameraUpdateFactory.newLatLngZoom(pha, 14.0f));
-            }else {
-                Toast.makeText(this, "Il n'existe pas de coordonnées", Toast.LENGTH_SHORT).show();
-            }
-
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public void getPlacePosition(Double longitude, Double latitude) {
+        if (latitude != null && longitude != null) {
+            LatLng pha = new LatLng(latitude, longitude);
+            @SuppressLint("UseCompatLoadingForDrawables") BitmapDrawable bitmapDrawable = (BitmapDrawable) getResources().getDrawable(R.drawable.touran_pin, null);
+            Bitmap b = bitmapDrawable.getBitmap();
+            Bitmap smallmarker = Bitmap.createScaledBitmap(b, 72, 120, true);
+            map.addMarker(new MarkerOptions()
+                    .position(pha)
+                    .title(name).icon(BitmapDescriptorFactory.fromBitmap(smallmarker)));
+            //  map.moveCamera(CameraUpdateFactory.newLatLng(pha));
+            map.animateCamera(CameraUpdateFactory.newLatLngZoom(pha, 14.0f));
+        } else {
+            Toast.makeText(this, "Il n'existe pas de coordonnées", Toast.LENGTH_SHORT).show();
+        }
     }
+
     private BitmapDescriptor BitmapFromVector(Context context, int vectorResId) {
         // below line is use to generate a drawable.
         Drawable vectorDrawable = ContextCompat.getDrawable(context, vectorResId);
