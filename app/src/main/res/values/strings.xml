@@ -35,8 +35,8 @@
     <string name="siteshistoriques">Sites Historique</string>
     <string name="uchose">Vous aver choisi </string>
     <string name="generer">Génerer</string>
-
-
+    <string name="default_info_title">Oran</string>
+    <string name="default_info_snippet">Oran EL Bahia</string>
 
 
 </resources>
