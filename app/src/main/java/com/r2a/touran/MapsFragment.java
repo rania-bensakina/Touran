@@ -149,9 +149,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
                         LocationCallback locationCallback = new LocationCallback() {
                             @Override
                             public void onLocationResult(LocationResult locationResult) {
-
                                 Location location1 = locationResult.getLastLocation();
-                                System.out.println(location1);
                                 LatLng latLng = new LatLng(location1.getLatitude(), location.getLongitude());
                                 map.addMarker(new MarkerOptions().position(latLng).title("Ma location"));
                                 map.moveCamera(CameraUpdateFactory.newLatLng(latLng));

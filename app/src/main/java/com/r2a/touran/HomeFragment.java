@@ -61,7 +61,7 @@ public class HomeFragment extends Fragment {
 
 
         ArrayList<Place> placeArrayList = new ArrayList<Place>();
-        Place place =new  Place("hahha", CULTURE, 22.00,-5.4);
+        Place place =new  Place("hahha", CULTURE, 35.693403,-0.626094);
         placeArrayList.add(place);
         Place place1 = new Place("hahhdfgrga",CULTURE,30.00,-12.25);
         placeArrayList.add(place1);
