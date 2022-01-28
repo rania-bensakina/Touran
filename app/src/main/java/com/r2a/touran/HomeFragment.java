@@ -40,7 +40,7 @@ public class HomeFragment extends Fragment {
     ClosestPlacesAdapter adapter;
     LinearLayoutManager HorizontalLayout;
     int RecyclerViewItemPosition;
-
+String nom ;
     private HomeViewModel mViewModel;
 
     public HomeFragment(int contentLayoutId) {
@@ -48,9 +48,8 @@ public class HomeFragment extends Fragment {
     }
 
     public HomeFragment() {
-        // Required empty public constructor
-    }
 
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -91,11 +90,14 @@ public class HomeFragment extends Fragment {
         binding.searchView.setThreshold(2);
         binding.searchView.setOnItemClickListener((adapterView, view12, j, l) -> {
             String finalnom = binding.searchView.getText().toString();
+            nom = finalnom;
             Intent intent = new Intent(getActivity(), PlaceInfoActivity.class);
             intent.putExtra("name", finalnom);
             startActivity(intent);
             // intent.putExtra("description",p.getDescription());
         });
+       int i =  placeArrayList.indexOf(nom);
+        System.out.println(i);
         RecyclerViewLayoutManager
                 = new LinearLayoutManager(
                 getActivity().getApplicationContext());
@@ -105,21 +107,9 @@ public class HomeFragment extends Fragment {
         HorizontalLayout
                 = new LinearLayoutManager(
                 getContext(),
-                LinearLayoutManager.HORIZONTAL,
-                false);
+                LinearLayoutManager.HORIZONTAL, false);
         binding.closestPlaces.setLayoutManager(HorizontalLayout);
         binding.closestPlaces.setAdapter(adapter);
-        adapter.setOnItemClickListener(new ClosestPlacesAdapter.ClickListener() {
-            @Override
-            public void onItemClick(int position, View v) {
-                Log.d("TAG", "onItemClick position: " + position);
-            }
-
-            @Override
-            public void onItemLongClick(int position, View v) {
-                Log.d("TAG", "onItemLongClick pos = " + position);
-            }
-        });
 
 
         binding.cfood.setOnClickListener(new View.OnClickListener() {
