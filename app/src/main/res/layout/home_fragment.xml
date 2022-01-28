@@ -185,7 +185,6 @@
                             android:layout_width="wrap_content"
                             android:layout_toLeftOf="@+id/shopping"
                             android:layout_centerInParent="true"
-                            android:background="@color/white"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:layout_marginEnd="10dp"
@@ -277,6 +276,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:text="@string/Enterntainement"
+                            android:textColor="@color/black"
                             android:layout_centerInParent="true"
                             android:fontFamily="@font/medium"
                             android:textSize="15sp" />
@@ -299,22 +299,24 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Lieux de voyage"
-                android:paddingStart="@dimen/start"
                 android:fontFamily="@font/medium"
-                android:textSize="25dp"
-                android:textColor="@color/black" />
+                android:paddingStart="@dimen/start"
+                android:layout_centerVertical="true"
+                android:text="@string/liexdevoyages"
+                android:textColor="@color/black"
+                android:textSize="25dp" />
 
             <Button
                 android:layout_width="wrap_content"
-                android:text="@string/seeall"
-                android:backgroundTint="@color/colorPrimary"
-                android:textSize="10dp"
-                android:textColor="@color/black"
-                android:layout_centerHorizontal="true"
-                android:fontFamily="@font/light"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true" />
+                android:layout_alignParentEnd="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginEnd="@dimen/start"
+                android:backgroundTint="@color/colorPrimary"
+                android:fontFamily="@font/light"
+                android:text="@string/seeall"
+                android:textColor="@color/black"
+                android:textSize="10dp" />
         </RelativeLayout>
 
         <androidx.recyclerview.widget.RecyclerView
