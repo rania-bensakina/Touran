@@ -14,7 +14,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HomeViewModel extends ViewModel {
-    String BASE_URL="https://bendabizadam.westeurope.cloudapp.azure.com/api/v1";
+    String BASE_URL="https://bendabizadam.westeurope.cloudapp.azure.com/api/v1/";
     OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(BASE_URL)
