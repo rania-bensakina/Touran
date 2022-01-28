@@ -5,6 +5,15 @@ package com.r2a.touran.data;
 
 
 public class Place {
+
+    private String name;
+    private Double longitude;
+    private Double latitude;
+    private double startingprice;
+    private PlaceType type;
+    private double rate;
+    private String imglink;
+
     public Place(String name, PlaceType placeType, double latitude, double longitude) {
         this.name= name;
         this.type = placeType;
@@ -52,12 +61,12 @@ public class Place {
         this.type = type;
     }
 
-    public double getRank() {
-        return rank;
+    public double getRate() {
+        return rate;
     }
 
-    public void setRank(double rank) {
-        this.rank = rank;
+    public void setRate(double rate) {
+        this.rate = rate;
     }
 
     public String getImglink() {
@@ -76,13 +85,6 @@ public class Place {
         this.description = description;
     }
 
-    private String name;
-    private Double longitude;
-    private Double latitude;
-    private double startingprice;
-    private PlaceType type;
-    private double rank;
-    private String imglink;
 
     public Place(String name, Double longitude, Double latitude, double startingprice, PlaceType type, double rank, String imglink, String description) {
         this.name = name;
@@ -90,7 +92,7 @@ public class Place {
         this.latitude = latitude;
         this.startingprice = startingprice;
         this.type = type;
-        this.rank = rank;
+        this.rate = rank;
         this.imglink = imglink;
         this.description = description;
     }

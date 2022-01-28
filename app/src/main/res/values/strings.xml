@@ -1,4 +1,5 @@
 <resources>
+    <string name="BASE_URL">https://bendabizadam.westeurope.cloudapp.azure.com/api/v1</string>
     <string name="app_name">Touran</string>
     <string name="home">Home</string>
     <string name="Explorez">Explorez</string>

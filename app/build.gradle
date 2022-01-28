@@ -7,13 +7,13 @@ android {
         dataBinding true
 
     }
-    compileSdkVersion 31
+    compileSdkVersion 32
     buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "com.r2a.touran"
         minSdkVersion 19
-        targetSdkVersion 31
+        targetSdkVersion 32
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
@@ -34,6 +34,12 @@ android {
 }
 
 dependencies {
+    // Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.1.0'
+
+// JSON Parsing
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
     implementation 'com.google.android.libraries.places:places:2.5.0'
     implementation 'com.google.android.gms:play-services-maps:18.0.2'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
