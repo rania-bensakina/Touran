@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.r2a.touran.ui.PlaceInfoActivity;
 import com.r2a.touran.data.Place;
 import com.r2a.touran.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -99,7 +100,7 @@ Activity activity;
     @Override
     public void onBindViewHolder(@NonNull MyView holder, @SuppressLint("RecyclerView") int position) {
         holder.name.setText(list.get(position).getName());
-        holder.coordinates.setText(String.format("%s , %s" , list.get(position).getLongitude(),list.get(position).getLatitude()));
+        holder.coordinates.setText("Oran , EL Bahia");
        /* holder.like.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -108,6 +109,7 @@ Activity activity;
                 holder.like.setImageResource(R.drawable.ic_heart);
             }
         });*/
+        Picasso.get().load(list.get(position).getImglink()).into(holder.placeImage);
         holder.placeImage.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override

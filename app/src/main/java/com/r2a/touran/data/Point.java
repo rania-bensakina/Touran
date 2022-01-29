@@ -1,6 +1,8 @@
 package com.r2a.touran.data;
 
 
+import java.util.Arrays;
+
 public class Point {
     String type="Point";
     double[] coordinates;
@@ -32,5 +34,13 @@ public class Point {
 
     public Point(double[] coordinates) {
         this.coordinates = coordinates;
+    }
+
+    @Override
+    public String toString() {
+        return "Point{" +
+                "type='" + type + '\'' +
+                ", coordinates=" + Arrays.toString(coordinates) +
+                '}';
     }
 }
