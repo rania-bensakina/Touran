@@ -11,7 +11,7 @@
         android:orientation="vertical"
         android:layout_height="match_parent"
         android:gravity="center"
-        tools:context=".BudgetFragment">
+        tools:context=".ui.BudgetFragment">
 
         <TextView
             android:id="@+id/text"

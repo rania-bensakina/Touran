@@ -1,4 +1,4 @@
-package com.r2a.touran;
+package com.r2a.touran.ui;
 
 import android.content.Context;
 import android.graphics.Rect;
@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
-import com.r2a.touran.databinding.ActivtyHome2Binding;
+import com.r2a.touran.R;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

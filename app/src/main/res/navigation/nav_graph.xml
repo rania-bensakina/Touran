@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.r2a.touran.HomeFragment"
+        android:name="com.r2a.touran.ui.HomeFragment"
         android:label="HomeFragment" >
         <action
             android:id="@+id/action_homeFragment_to_placeInfoActivity"
@@ -14,6 +14,6 @@
     </fragment>
     <activity
         android:id="@+id/placeInfoActivity"
-        android:name="com.r2a.touran.PlaceInfoActivity"
+        android:name="com.r2a.touran.ui.PlaceInfoActivity"
         android:label="PlaceInfoActivity" />
 </navigation>

@@ -1,4 +1,4 @@
-package com.r2a.touran;
+package com.r2a.touran.ui;
 
 import android.Manifest;
 import android.content.Context;
@@ -34,6 +34,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.r2a.touran.R;
 
 
 public class MapsFragment extends Fragment implements OnMapReadyCallback {

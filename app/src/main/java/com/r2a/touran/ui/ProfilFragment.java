@@ -1,4 +1,4 @@
-package com.r2a.touran;
+package com.r2a.touran.ui;
 
 import androidx.lifecycle.ViewModelProvider;
 
@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.r2a.touran.R;
 import com.r2a.touran.viewmodels.ProfilViewModel;
 
 public class ProfilFragment extends Fragment {

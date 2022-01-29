@@ -1,9 +1,8 @@
-package com.r2a.touran;
+package com.r2a.touran.ui;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,16 +13,13 @@ import androidx.lifecycle.ViewModelProviders;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.google.android.material.chip.Chip;
-import com.r2a.touran.data.Place;
+import com.r2a.touran.R;
 import com.r2a.touran.databinding.BudgetFragmentBinding;
-import com.r2a.touran.databinding.HomeFragmentBinding;
 import com.r2a.touran.viewmodels.BudgetViewModel;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class BudgetFragment extends Fragment {
 
@@ -54,7 +50,6 @@ ArrayList<String> activitiesList = new ArrayList<>();
                   deleteFromTheList(binding.chip1,activitiesList);
                }else
                addToTheList(binding.chip1,activitiesList);
-               System.out.println(activitiesList);
            }
        });
         binding.chip2.setOnClickListener(new View.OnClickListener() {
@@ -64,7 +59,7 @@ ArrayList<String> activitiesList = new ArrayList<>();
                     deleteFromTheList(binding.chip2,activitiesList);
                 }else
                     addToTheList(binding.chip2,activitiesList);
-                System.out.println(activitiesList);
+
             }
         });
         binding.chip3.setOnClickListener(new View.OnClickListener() {
@@ -74,7 +69,7 @@ ArrayList<String> activitiesList = new ArrayList<>();
                     deleteFromTheList(binding.chip3,activitiesList);
                 }else
                     addToTheList(binding.chip3,activitiesList);
-                System.out.println(activitiesList);
+
             }
         });
         binding.chip4.setOnClickListener(new View.OnClickListener() {
@@ -84,7 +79,6 @@ ArrayList<String> activitiesList = new ArrayList<>();
                     deleteFromTheList(binding.chip4,activitiesList);
                 }else
                     addToTheList(binding.chip4,activitiesList);
-                System.out.println(activitiesList);
             }
         });
         binding.chip5.setOnClickListener(new View.OnClickListener() {
@@ -93,9 +87,7 @@ ArrayList<String> activitiesList = new ArrayList<>();
                 if (binding.chip5.isSelected()){
                     deleteFromTheList(binding.chip5,activitiesList);
                 }else
-                    addToTheList(binding.chip5,activitiesList);
-                System.out.println(activitiesList);
-            }
+                    addToTheList(binding.chip5,activitiesList); }
         });
         binding.generer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,12 +110,5 @@ ArrayList<String> activitiesList = new ArrayList<>();
         chip.setSelected(false);
         chip.setChipBackgroundColorResource(R.color.standard);
         activities.remove(chip.getText().toString()); }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(BudgetViewModel.class);
-        // TODO: Use the ViewModel
-    }
 
 }

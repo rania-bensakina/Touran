@@ -31,10 +31,10 @@
             android:value="@string/API_KEY" />
 
         <activity
-            android:name=".PlaceInfoActivity"
+            android:name=".ui.PlaceInfoActivity"
             android:theme="@style/Theme.Touran.NoActionBar" />
         <activity
-            android:name=".HomeActivity"
+            android:name=".ui.HomeActivity"
             android:theme="@style/Theme.Touran.NoActionBar"
             android:exported="true">
             <intent-filter>

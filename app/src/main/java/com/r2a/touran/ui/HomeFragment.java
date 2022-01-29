@@ -1,20 +1,15 @@
-package com.r2a.touran;
+package com.r2a.touran.ui;
 
 import static com.r2a.touran.data.Place.PlaceType.CULTURE;
 import static com.r2a.touran.data.Place.PlaceType.SHOPPING;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.RelativeLayout;
 
@@ -26,6 +21,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.r2a.touran.R;
 import com.r2a.touran.adapters.ClosestPlacesAdapter;
 import com.r2a.touran.data.Place;
 import com.r2a.touran.viewmodels.HomeViewModel;

@@ -1,4 +1,4 @@
-package com.r2a.touran;
+package com.r2a.touran.ui;
 
 import static com.r2a.touran.data.Place.PlaceType.SHOPPING;
 
@@ -34,6 +34,7 @@ import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.r2a.touran.R;
 import com.r2a.touran.data.Place;
 import com.r2a.touran.databinding.PlaceInfoActivityBinding;
 

@@ -1,4 +1,4 @@
-package com.r2a.touran.ui.main;
+package com.r2a.touran.viewmodels;
 
 import androidx.lifecycle.ViewModel;
 

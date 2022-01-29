@@ -1,4 +1,4 @@
-package com.r2a.touran;
+package com.r2a.touran.ui;
 
 import android.os.Bundle;
 
@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.r2a.touran.R;
 import com.r2a.touran.viewmodels.BusViewModel;
 
 public class BusFragment extends Fragment {
