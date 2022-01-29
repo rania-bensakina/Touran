@@ -14,6 +14,16 @@ public class Place {
     private double rate;
     private String imglink;
 
+    public Place(String name, Double longitude, Double latitude, double rate, String imglink, String description,PlaceType type) {
+        this.name = name;
+        this.type=type;
+        this.longitude = longitude;
+        this.latitude = latitude;
+        this.rate = rate;
+        this.imglink = imglink;
+        this.description = description;
+    }
+
     public Place(String name, PlaceType placeType, double latitude, double longitude) {
         this.name= name;
         this.type = placeType;

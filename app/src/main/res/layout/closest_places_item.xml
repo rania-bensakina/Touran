@@ -29,6 +29,7 @@
 
 
                 <ImageButton
+
                     android:id="@+id/like"
                     android:layout_width="42dp"
                     android:layout_height="42dp"

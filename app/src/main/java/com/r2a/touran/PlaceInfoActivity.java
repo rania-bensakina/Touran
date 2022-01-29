@@ -59,11 +59,13 @@ public class PlaceInfoActivity extends AppCompatActivity implements OnMapReadyCa
         if (this.getIntent() != null) {
             Bundle extras = this.getIntent().getExtras();
             name = extras.getString("name");
-            binding.description.setText(name);
-            String price = extras.getString("description");
+            binding.name.setText(name);
+            String description = extras.getString("description");
+            binding.description.setText(description);
+            binding.ratings.setText(String.valueOf(extras.getDouble("rank")));
+            System.out.println(extras.getDouble("rank"));
             longitude = extras.getDouble("longitude");
-            latitude = extras.getDouble("latitude");//  place = new Place("gyguy",SHOPPING,35.693403,-0.626094);
-            // Build the map.
+            latitude = extras.getDouble("latitude");
             SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.maplace);
             if (mapFragment != null) {
                 mapFragment.getMapAsync(this);

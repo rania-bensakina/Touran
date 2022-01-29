@@ -60,9 +60,10 @@ String nom ;
 
 
         ArrayList<Place> placeArrayList = new ArrayList<Place>();
-        Place place =new  Place("hahha", CULTURE, 35.693403,-0.626094);
+        Place place =new  Place("hahha", 35.693403,-0.626094,5,"https://airalgerie.dz/wp-content/uploads/2016/10/oran-780-360.jpg.jpg","Very beautiful thing",CULTURE);
         placeArrayList.add(place);
         Place place1 = new Place("hahhdfgrga",CULTURE,30.00,-12.25);
+        place1.setType(CULTURE);
         placeArrayList.add(place1);
         Place place2 = new Place("gyguy",SHOPPING,30.00,-12.25);
         placeArrayList.add(place2);
@@ -80,8 +81,8 @@ String nom ;
         placeArrayList.add(place8);*/
 
         for (int i = 0; i < placeArrayList.size(); i++) {
-            final Place placei = placeArrayList.get(i);
-            String fullplace = String.format("%s | %s", placei.getName(), placei.getType().toString());
+            Place placei = placeArrayList.get(i);
+            String fullplace = String.format("%s | %s", placei.getName(), placei.getType().name());
             if (!placesList.contains(fullplace)) placesList.add(fullplace);
         }
 

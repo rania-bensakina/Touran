@@ -14,6 +14,9 @@
     <string name="name">Name</string>
     <string name="coordinates">Coordinates</string>
     <string name="profile">Profil</string>
+    <string name="personalinfos">Informations personnelles</string>
+    <string name="avislegal">Avis légal</string>politique de confidentialité
+    <string name="politique">politique de confidentialité</string>
     <string name="map">Carte</string>
     <string name="Bus">Bus</string>
     <string name="liexdevoyages">Lieux de voyage</string>

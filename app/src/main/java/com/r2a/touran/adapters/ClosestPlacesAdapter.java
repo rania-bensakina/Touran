@@ -3,17 +3,25 @@ package com.r2a.touran.adapters;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.view.ViewCompat;
 import androidx.navigation.Navigator;
 import androidx.navigation.fragment.FragmentNavigator;
@@ -39,7 +47,7 @@ Activity activity;
             // Text View
             TextView name,coordinates;
             ImageView placeImage;
-
+            ImageButton like;
             // parameterised constructor for View Holder class
             // which takes the view as a parameter
             @SuppressLint("CutPasteId")
@@ -53,6 +61,7 @@ Activity activity;
                 coordinates = (TextView)view
                         .findViewById(R.id.coodinates);
                 placeImage = (ImageView)view.findViewById(R.id.place_image);
+                like = (ImageButton) view.findViewById(R.id.like);
             }
 
             @Override
@@ -104,17 +113,23 @@ Activity activity;
     public void onBindViewHolder(@NonNull MyView holder, @SuppressLint("RecyclerView") int position) {
         holder.name.setText(list.get(position).getName());
         holder.coordinates.setText(String.format("%s , %s" , list.get(position).getLongitude(),list.get(position).getLatitude()));
-      //  holder.placeImage.(list.get(position).getName());
+       /* holder.like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                System.out.println(R.drawable.ic_heart);
+                holder.like.setImageResource(R.drawable.ic_heart);
+            }
+        });*/
         holder.placeImage.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View v) {
-               // Toast.makeText(v.getContext(), "hellllo", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(v.getContext(), PlaceInfoActivity.class);
     ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(activity,holder.placeImage,"image_small");
                 intent.putExtra("name", list.get(position).getName());
                 intent.putExtra("description", list.get(position).getDescription());
+                intent.putExtra("rank", list.get(position).getRate());
                 intent.putExtra("longitude", list.get(position).getLongitude());
                 intent.putExtra("latitude", list.get(position).getLatitude());
 
