@@ -6,6 +6,7 @@ import static com.r2a.touran.data.Place.PlaceType.SHOPPING;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -32,6 +34,7 @@ import com.r2a.touran.databinding.HomeFragmentBinding;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class HomeFragment extends Fragment {
 
@@ -51,6 +54,7 @@ public class HomeFragment extends Fragment {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -83,7 +87,15 @@ public class HomeFragment extends Fragment {
                 String finalnom = binding.searchView.getText().toString();
                 nom = finalnom;
                 Intent intent = new Intent(getActivity(), PlaceInfoActivity.class);
-                intent.putExtra("name", finalnom);
+                Place myplace = mylist.stream().filter(item -> finalnom
+                                .equals(String.format("%s | %s", item.getName(), item.getType()))).collect(Collectors.toList()).get(0);
+                intent.putExtra("name", myplace.getName());
+                intent.putExtra("imglink",myplace.getImglink());
+                intent.putExtra("description", myplace.getDescription());
+                intent.putExtra("rank", myplace.getRate());
+                intent.putExtra("longitude", myplace.getLongitude());
+                intent.putExtra("latitude",myplace.getLatitude());
+                intent.putExtra("imglink",myplace.getImglink());
                 startActivity(intent);
                 // intent.putExtra("description",p.getDescription());
             });
