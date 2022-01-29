@@ -106,7 +106,7 @@ Activity activity;
             holder.name.setText(p.getName());
             holder.type.setText(p.getType());
             Picasso.get().load(p.getImglink()).into(holder.placeImage);
-            holder.placeImage.setOnClickListener(new View.OnClickListener() {
+        /*    holder.placeImage.setOnClickListener(new View.OnClickListener() {
                 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                 @Override
                 public void onClick(View v) {
@@ -121,17 +121,8 @@ Activity activity;
                     v.getContext().startActivity(intent, optionsCompat.toBundle());
                 }
             });
-
+*/
         }
-
-       /* holder.like.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                System.out.println(R.drawable.ic_heart);
-                holder.like.setImageResource(R.drawable.ic_heart);
-            }
-        });*/
     }
 
 

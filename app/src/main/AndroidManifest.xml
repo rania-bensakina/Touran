@@ -17,7 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Touran">
         <activity
-            android:name=".SuggestedPlacesActivity"
+            android:name=".ui.SuggestedPlacesActivity"
             android:exported="false" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
