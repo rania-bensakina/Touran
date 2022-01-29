@@ -20,6 +20,7 @@ import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.transition.TransitionInflater;
 import android.util.Log;
 import android.view.animation.Animation;
@@ -37,6 +38,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.r2a.touran.R;
 import com.r2a.touran.data.Place;
 import com.r2a.touran.databinding.PlaceInfoActivityBinding;
+import com.squareup.picasso.Picasso;
 
 import java.util.TimeZone;
 
@@ -46,6 +48,7 @@ public class PlaceInfoActivity extends AppCompatActivity implements OnMapReadyCa
     Place place;
     Double longitude, latitude;
     String name;
+    String imglink;
     private boolean locationPermissionGranted;
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
@@ -63,10 +66,12 @@ public class PlaceInfoActivity extends AppCompatActivity implements OnMapReadyCa
             binding.name.setText(name);
             String description = extras.getString("description");
             binding.description.setText(description);
+            binding.description.setMovementMethod(new ScrollingMovementMethod());
             binding.ratings.setText(String.valueOf(extras.getDouble("rank")));
             System.out.println(extras.getDouble("rank"));
             longitude = extras.getDouble("longitude");
             latitude = extras.getDouble("latitude");
+            Picasso.get().load(extras.getString("imglink")).fit().into(binding.placeImage);
             SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.maplace);
             if (mapFragment != null) {
                 mapFragment.getMapAsync(this);

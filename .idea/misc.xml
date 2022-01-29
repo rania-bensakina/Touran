@@ -27,7 +27,8 @@
         <entry key="app/src/main/res/layout/home_fragment.xml" value="0.25" />
         <entry key="app/src/main/res/layout/map_fragment.xml" value="0.1" />
         <entry key="app/src/main/res/layout/mapfragment.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/place_info_activity.xml" value="0.2351851851851852" />
+        <entry key="app/src/main/res/layout/place_info_activity.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/place_info_activity_finish.xml" value="0.16485507246376813" />
         <entry key="app/src/main/res/layout/place_info_activity_start.xml" value="0.25" />
         <entry key="app/src/main/res/layout/profil_fragment.xml" value="0.2986111111111111" />
         <entry key="app/src/main/res/layout/row_places.xml" value="0.2986111111111111" />

@@ -131,24 +131,20 @@
                 />
 
         </RelativeLayout>
-        <ScrollView
-            android:id="@+id/scrollabledescription"
-            android:layout_margin="24dp"
+        <LinearLayout
             app:layout_constraintHeight_percent="0.2"
             app:layout_constraintTop_toBottomOf="@id/bigwrapper"
+            app:layout_constraintBottom_toTopOf="@id/voiSurMap"
+            android:layout_marginStart="24dp"
+            android:id="@+id/descswrapper"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:id="@+id/descswrapper"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingVertical="6dp"
-                android:orientation="vertical">
+            android:layout_height="0dp"
+            android:paddingVertical="6dp"
+            android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:fontFamily="@font/extra_bold"
                     android:text="@string/description"
                     android:textColor="#363636"
@@ -157,15 +153,17 @@
 
                 <TextView
                     android:id="@+id/description"
+                    android:maxLines="5"
+                    android:scrollbars = "vertical"
+                    android:maxHeight="70dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:fontFamily="@font/extra_bold"
                     android:text="The heavenly land built with love\nand magic"
                     android:textColor="@color/textGrey"
                     android:textSize="18dp" />
             </LinearLayout>
 
-        </ScrollView>
 
 
 

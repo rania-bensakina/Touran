@@ -121,7 +121,7 @@ Activity activity;
                 intent.putExtra("rank", list.get(position).getRate());
                 intent.putExtra("longitude", list.get(position).getLongitude());
                 intent.putExtra("latitude", list.get(position).getLatitude());
-
+                intent.putExtra("imglink",list.get(position).getImglink());
                 v.getContext().startActivity(intent, optionsCompat.toBundle());
             }
         });
