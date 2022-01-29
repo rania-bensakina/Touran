@@ -1,11 +1,15 @@
 package com.r2a.touran.viewmodels;
 
-import android.content.res.Resources;
 
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.r2a.touran.BuildConfig;
 import com.r2a.touran.data.Place;
 import com.r2a.touran.service.PlaceService;
+
+import java.util.List;
+import java.util.Map;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
@@ -14,10 +18,16 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HomeViewModel extends ViewModel {
-    String BASE_URL="https://bendabizadam.westeurope.cloudapp.azure.com/api/v1/";
+    MutableLiveData<List<Place>> places ;
+    MutableLiveData<List<List<Place>>> listoflistsofplacesbybudget;
+    public HomeViewModel(){
+        places = new MutableLiveData<>();
+    }
+
+
     OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
     Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(BuildConfig.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(httpClient.build())
             .build();
@@ -25,19 +35,18 @@ public class HomeViewModel extends ViewModel {
     // TODO: Implement the ViewModel
     public void getPlace(){
         Call<Place> callSync = service.getPlaceById(1L);
-
         try {
             Response<Place> response = callSync.execute();
             Place p = response.body();
         } catch (Exception ex) {  }
     }
-    public void getPlacesByBudget(){
+    public void getPlacesByBudget(int budget,String[] filter){
 
-        Call<Place> callSync = service.getPlaceById(1L);
+        Call<Map<String, List<List<Place>>>> callSync = service.getPlacesByBudget(budget,filter);
 
         try {
-            Response<Place> response = callSync.execute();
-            Place p = response.body();
+            Response<Map<String, List<List<Place>>>> response = callSync.execute();
+            listoflistsofplacesbybudget.setValue(response.body().get("places"));
         } catch (Exception ex) {  }
     }
 

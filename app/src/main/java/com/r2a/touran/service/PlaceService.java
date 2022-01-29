@@ -29,5 +29,5 @@ public interface PlaceService {
     @GET("/places")
     public Call<Map<String,List<Place>>> getNearbyPlacesWithinDistance(@Query("currrentlocation") Point currentlocation, @Query("distancerange") double distancerange);
 
-
+    public Call<Void> updateRate(@Path("id") Long id ,@Query("type") String type);
 }
