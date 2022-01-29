@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,8 @@ import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.r2a.touran.BuildConfig;
+import com.r2a.touran.service.PlaceService;
 import com.r2a.touran.ui.PlaceInfoActivity;
 import com.r2a.touran.data.Place;
 import com.r2a.touran.R;
@@ -23,7 +26,22 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import okhttp3.OkHttpClient;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class ClosestPlacesAdapter extends RecyclerView.Adapter<ClosestPlacesAdapter.MyView> {
+
+    OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+    Retrofit retrofit = new Retrofit.Builder()
+            .baseUrl(BuildConfig.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(httpClient.build())
+            .build();
+    PlaceService service = retrofit.create(PlaceService.class);
     private static ClickListener clickListener;
         // List with Place type
         private List<Place> list;
@@ -31,7 +49,7 @@ Activity activity;
         // View Holder class which
         // extends RecyclerView.ViewHolder
         public class MyView extends RecyclerView.ViewHolder  implements View.OnClickListener, View.OnLongClickListener{
-
+            Boolean itemliked= false;
             // Text View
             TextView name,coordinates;
             ImageView placeImage;
@@ -100,15 +118,50 @@ Activity activity;
     @Override
     public void onBindViewHolder(@NonNull MyView holder, @SuppressLint("RecyclerView") int position) {
         holder.name.setText(list.get(position).getName());
-        holder.coordinates.setText("Oran , EL Bahia");
-       /* holder.like.setOnClickListener(new View.OnClickListener() {
+        holder.coordinates.setText(String.format("%d people like this place",(int)list.get(position).getRate()));
+        holder.like.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(!holder.itemliked) {
+                    holder.itemliked = true;
+                    holder.like.setImageResource(R.drawable.ic_heart_filled);
+                    holder.coordinates.setText(String.format("%d people like this place",(int)list.get(position).getRate()+1));
+                    Call<Void> mycall = service.likeAPlace(list.get(position).getId(),"LIKE");
+                    mycall.enqueue(new Callback<Void>() {
+                        @Override
+                        public void onResponse(Call<Void> call, Response<Void> response) {
 
-                System.out.println(R.drawable.ic_heart);
-                holder.like.setImageResource(R.drawable.ic_heart);
+                        }
+
+                        @Override
+                        public void onFailure(Call<Void> call, Throwable t) {
+                            Log.i("failed", "onFailure: ",t.fillInStackTrace());
+                            holder.like.setImageResource(R.drawable.ic_heart);
+                            holder.coordinates.setText(String.format("%d people like this place",(int)list.get(position).getRate()-1));
+                            holder.itemliked = false;
+                        }
+                    });
+                }else{
+                    holder.itemliked = false;
+                    holder.like.setImageResource(R.drawable.ic_heart);
+                    holder.coordinates.setText(String.format("%d people like this place",(int)list.get(position).getRate()-1));
+                    Call<Void> mycall = service.likeAPlace(list.get(position).getId(),"DISLIKE");
+                    mycall.enqueue(new Callback<Void>() {
+                        @Override
+                        public void onResponse(Call<Void> call, Response<Void> response) {
+                        }
+
+                        @Override
+                        public void onFailure(Call<Void> call, Throwable t) {
+                            Log.i("failed", "onFailure: ",t.fillInStackTrace());
+                            holder.like.setImageResource(R.drawable.ic_heart_filled);
+                            holder.coordinates.setText(String.format("%d people like this place",(int)list.get(position).getRate()+1));
+                            holder.itemliked = true;
+                        }
+                    });
+                }
             }
-        });*/
+        });
         Picasso.get().load(list.get(position).getImglink()).into(holder.placeImage);
         holder.placeImage.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -122,6 +175,7 @@ Activity activity;
                 intent.putExtra("longitude", list.get(position).getLongitude());
                 intent.putExtra("latitude", list.get(position).getLatitude());
                 intent.putExtra("imglink",list.get(position).getImglink());
+                intent.putExtra("liked",holder.itemliked);
                 v.getContext().startActivity(intent, optionsCompat.toBundle());
             }
         });
