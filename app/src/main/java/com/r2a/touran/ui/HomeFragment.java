@@ -60,13 +60,6 @@ public class HomeFragment extends Fragment {
 
 
         ArrayList<Place> placeArrayList = new ArrayList<>();
-        /*Place place =new  Place("hahha", 35.693403,-0.626094,5,"https://airalgerie.dz/wp-content/uploads/2016/10/oran-780-360.jpg.jpg","Very beautiful thing",CULTURE);
-        placeArrayList.add(place);
-        Place place1 = new Place("hahhdfgrga",CULTURE,30.00,-12.25);
-        place1.setType(CULTURE);
-        placeArrayList.add(place1);
-        Place place2 = new Place("gyguy",SHOPPING,30.00,-12.25);
-        placeArrayList.add(place2);*/
         HomeViewModel model = ViewModelProviders.of(this).get(HomeViewModel.class);
         model.getAllPlacesObject().observe(getViewLifecycleOwner(),listofplaces -> {
             List<Place> mylist = (List<Place>)listofplaces;
