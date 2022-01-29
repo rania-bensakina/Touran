@@ -14,20 +14,21 @@ import retrofit2.http.Query;
 
 public interface PlaceService {
 
-    @GET("/places")
+    @GET("places")
     public Call<Map<String,List<Place>>> getAllPlaces();
 
-    @GET("/places/{id}")
+    @GET("places/{id}")
     public Call<Place> getPlaceById(@Path("id") Long id);
 
-    @PATCH("/places/{id}")
+    @PATCH("places/{id}")
     public Call<Void> likeAPlace(@Path("id") Long id,@Query("type") String type);
 
-    @GET("/places")
+    @GET("places")
     public Call<Map<String, List<List<Place>>>> getPlacesByBudget(@Query("budget") int budget,@Query("filter") String[] filter);
 
-    @GET("/places")
+    @GET("places")
     public Call<Map<String,List<Place>>> getNearbyPlacesWithinDistance(@Query("currrentlocation") Point currentlocation, @Query("distancerange") double distancerange);
 
+    @PATCH("places/{id}")
     public Call<Void> updateRate(@Path("id") Long id ,@Query("type") String type);
 }

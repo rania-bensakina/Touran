@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,16 +19,19 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.r2a.touran.R;
 import com.r2a.touran.adapters.ClosestPlacesAdapter;
 import com.r2a.touran.data.Place;
+import com.r2a.touran.viewmodels.BudgetViewModel;
 import com.r2a.touran.viewmodels.HomeViewModel;
 import com.r2a.touran.databinding.HomeFragmentBinding;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class HomeFragment extends Fragment {
 
@@ -36,7 +40,7 @@ public class HomeFragment extends Fragment {
     ClosestPlacesAdapter adapter;
     LinearLayoutManager HorizontalLayout;
     int RecyclerViewItemPosition;
-String nom ;
+    String nom ;
     private HomeViewModel mViewModel;
 
     public HomeFragment(int contentLayoutId) {
@@ -55,58 +59,56 @@ String nom ;
         View view = binding.getRoot();
 
 
-        ArrayList<Place> placeArrayList = new ArrayList<Place>();
-        Place place =new  Place("hahha", 35.693403,-0.626094,5,"https://airalgerie.dz/wp-content/uploads/2016/10/oran-780-360.jpg.jpg","Very beautiful thing",CULTURE);
+        ArrayList<Place> placeArrayList = new ArrayList<>();
+        /*Place place =new  Place("hahha", 35.693403,-0.626094,5,"https://airalgerie.dz/wp-content/uploads/2016/10/oran-780-360.jpg.jpg","Very beautiful thing",CULTURE);
         placeArrayList.add(place);
         Place place1 = new Place("hahhdfgrga",CULTURE,30.00,-12.25);
         place1.setType(CULTURE);
         placeArrayList.add(place1);
         Place place2 = new Place("gyguy",SHOPPING,30.00,-12.25);
-        placeArrayList.add(place2);
-   /*     Place place3 = Place.builder().name("hugyuahha").type(CULTURE).longitude(40.00).latitude(-100.55).build();
-        placeArrayList.add(place3);
-        Place place4 = Place.builder().name("hhgeyzfguahha").type(CULTURE).longitude(12.00).latitude(200.5).build();
-        placeArrayList.add(place4);
-        Place place5 = Place.builder().name("hguhiuhiahha").type(Place.PlaceType.NATURE).longitude(512.23).latitude(-121.25).build();
-        placeArrayList.add(place5);
-        Place place6 = Place.builder().name("hahuugbjbhha").type(CULTURE).longitude(230.00).latitude(-1542.25).build();
-        placeArrayList.add(place6);
-        Place place7 = Place.builder().name("haygugiuhha").type(Place.PlaceType.SHOPPING).longitude(10.00).latitude(-125.25).build();
-        placeArrayList.add(place7);
-        Place place8 = Place.builder().name("hauguygiuhha").type(Place.PlaceType.SHOPPING).longitude(13.00).latitude(-200.00).build();
-        placeArrayList.add(place8);*/
-
-        for (int i = 0; i < placeArrayList.size(); i++) {
-            Place placei = placeArrayList.get(i);
-            String fullplace = String.format("%s | %s", placei.getName(), placei.getType().name());
-            if (!placesList.contains(fullplace)) placesList.add(fullplace);
-        }
-
-        ArrayAdapter<String> adaptername = new ArrayAdapter<String>(getContext(), R.layout.row_places, placesList);
-        binding.searchView.setAdapter(adaptername);
-        binding.searchView.setThreshold(2);
-        binding.searchView.setOnItemClickListener((adapterView, view12, j, l) -> {
-            String finalnom = binding.searchView.getText().toString();
-            nom = finalnom;
-            Intent intent = new Intent(getActivity(), PlaceInfoActivity.class);
-            intent.putExtra("name", finalnom);
-            startActivity(intent);
-            // intent.putExtra("description",p.getDescription());
+        placeArrayList.add(place2);*/
+        HomeViewModel model = ViewModelProviders.of(this).get(HomeViewModel.class);
+        model.getAllPlacesObject().observe(getViewLifecycleOwner(),listofplaces -> {
+            List<Place> mylist = (List<Place>)listofplaces;
+            // update ur ui hna
+            for (int i = 0; i < mylist.size(); i++) {
+                Place placei = mylist.get(i);
+                String fullplace = String.format("%s | %s", placei.getName(), placei.getType());
+                if (!placesList.contains(fullplace)) placesList.add(fullplace);
+            }
+            ArrayAdapter<String> adaptername = new ArrayAdapter<String>(getContext(), R.layout.row_places, placesList);
+            binding.searchView.setAdapter(adaptername);
+            binding.searchView.setThreshold(2);
+            binding.searchView.setOnItemClickListener((adapterView, view12, j, l) -> {
+                String finalnom = binding.searchView.getText().toString();
+                nom = finalnom;
+                Intent intent = new Intent(getActivity(), PlaceInfoActivity.class);
+                intent.putExtra("name", finalnom);
+                startActivity(intent);
+                // intent.putExtra("description",p.getDescription());
+            });
+            int i =  placeArrayList.indexOf(nom);
+            System.out.println(i);
+            RecyclerViewLayoutManager
+                    = new LinearLayoutManager(
+                    getActivity().getApplicationContext());
+            binding.closestPlaces.setLayoutManager(
+                    RecyclerViewLayoutManager);
+            adapter = new ClosestPlacesAdapter(getActivity(),mylist);
+            HorizontalLayout
+                    = new LinearLayoutManager(
+                    getContext(),
+                    LinearLayoutManager.HORIZONTAL, false);
+            binding.closestPlaces.setLayoutManager(HorizontalLayout);
+            binding.closestPlaces.setAdapter(adapter);
         });
-       int i =  placeArrayList.indexOf(nom);
-        System.out.println(i);
-        RecyclerViewLayoutManager
-                = new LinearLayoutManager(
-                getActivity().getApplicationContext());
-        binding.closestPlaces.setLayoutManager(
-                RecyclerViewLayoutManager);
-        adapter = new ClosestPlacesAdapter(getActivity(),placeArrayList);
-        HorizontalLayout
-                = new LinearLayoutManager(
-                getContext(),
-                LinearLayoutManager.HORIZONTAL, false);
-        binding.closestPlaces.setLayoutManager(HorizontalLayout);
-        binding.closestPlaces.setAdapter(adapter);
+        Log.i("TAG", "onCreateView: before call ");
+        model.getAllPlaces();
+
+
+
+
+
 
 
         binding.cfood.setOnClickListener(new View.OnClickListener() {

@@ -1,6 +1,8 @@
 package com.r2a.touran.viewmodels;
 
 
+import android.util.Log;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -13,15 +15,15 @@ import java.util.Map;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HomeViewModel extends ViewModel {
-    MutableLiveData<List<Place>> places ;
-    MutableLiveData<List<List<Place>>> listoflistsofplacesbybudget;
+    MutableLiveData<List<Place>> listofallplaces;
     public HomeViewModel(){
-        places = new MutableLiveData<>();
+        listofallplaces = new MutableLiveData<>();
     }
 
 
@@ -40,14 +42,32 @@ public class HomeViewModel extends ViewModel {
             Place p = response.body();
         } catch (Exception ex) {  }
     }
-    public void getPlacesByBudget(int budget,String[] filter){
+    public void getAllPlaces(){
 
-        Call<Map<String, List<List<Place>>>> callSync = service.getPlacesByBudget(budget,filter);
+        Call<Map<String, List<Place>>> callSync = service.getAllPlaces();
+        Log.i("here i am called", "called before http call: ");
 
         try {
-            Response<Map<String, List<List<Place>>>> response = callSync.execute();
-            listoflistsofplacesbybudget.setValue(response.body().get("places"));
-        } catch (Exception ex) {  }
+            callSync.enqueue(new Callback<Map<String, List<Place>>>() {
+                @Override
+                public void onResponse(Call<Map<String, List<Place>>> call, Response<Map<String, List<Place>>> response) {
+                    Log.i("TAG", "onResponse: succeed"+response.body().get("places"));
+                    listofallplaces.setValue(response.body().get("places"));
+                }
+
+                @Override
+                public void onFailure(Call<Map<String, List<Place>>> call, Throwable t) {
+                    Log.e("error calling api", "onFailure: ", t.fillInStackTrace());
+                }
+            });
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public MutableLiveData getAllPlacesObject(){
+        return listofallplaces;
     }
 
 }

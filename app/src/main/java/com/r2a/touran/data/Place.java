@@ -10,11 +10,20 @@ public class Place {
     private Double longitude;
     private Double latitude;
     private double startingprice;
-    private PlaceType type;
+    private String type;
+    private Point location;
     private double rate;
     private String imglink;
 
-    public Place(String name, Double longitude, Double latitude, double rate, String imglink, String description,PlaceType type) {
+    public Point getLocation() {
+        return location;
+    }
+
+    public void setLocation(Point location) {
+        this.location = location;
+    }
+
+    public Place(String name, Double longitude, Double latitude, double rate, String imglink, String description, String type) {
         this.name = name;
         this.type=type;
         this.longitude = longitude;
@@ -24,7 +33,7 @@ public class Place {
         this.description = description;
     }
 
-    public Place(String name, PlaceType placeType, double latitude, double longitude) {
+    public Place(String name, String placeType, double latitude, double longitude) {
         this.name= name;
         this.type = placeType;
         this.latitude=latitude;
@@ -40,7 +49,7 @@ public class Place {
     }
 
     public Double getLongitude() {
-        return longitude;
+        return location.coordinates[0];
     }
 
     public void setLongitude(Double longitude) {
@@ -48,7 +57,7 @@ public class Place {
     }
 
     public Double getLatitude() {
-        return latitude;
+        return location.coordinates[1];
     }
 
     public void setLatitude(Double latitude) {
@@ -63,11 +72,11 @@ public class Place {
         this.startingprice = startingprice;
     }
 
-    public PlaceType getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(PlaceType type) {
+    public void setType(String type) {
         this.type = type;
     }
 
@@ -96,7 +105,7 @@ public class Place {
     }
 
 
-    public Place(String name, Double longitude, Double latitude, double startingprice, PlaceType type, double rank, String imglink, String description) {
+    public Place(String name, Double longitude, Double latitude, double startingprice, String type, double rank, String imglink, String description) {
         this.name = name;
         this.longitude = longitude;
         this.latitude = latitude;
@@ -113,5 +122,18 @@ public class Place {
         CULTURE, NOURRITURE, DIVERTISSEMENT, NATURE, SHOPPING
     }
 
-
+    @Override
+    public String toString() {
+        return "Place{" +
+                "name='" + name + '\'' +
+                ", longitude=" + longitude +
+                ", latitude=" + latitude +
+                ", startingprice=" + startingprice +
+                ", type='" + type + '\'' +
+                ", location=" + location +
+                ", rate=" + rate +
+                ", imglink='" + imglink + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }

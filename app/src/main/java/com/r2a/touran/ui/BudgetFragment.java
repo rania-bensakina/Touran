@@ -23,7 +23,6 @@ import java.util.ArrayList;
 
 public class BudgetFragment extends Fragment {
 
-    private BudgetViewModel mViewModel;
 int numberOfDays,numberOfPersons,budget;
 ArrayList<String> activitiesList = new ArrayList<>();
     public static BudgetFragment newInstance() {
@@ -37,11 +36,11 @@ ArrayList<String> activitiesList = new ArrayList<>();
                 inflater, R.layout.budget_fragment, container, false);
         View view = binding.getRoot();
         BudgetViewModel model =ViewModelProviders.of(this).get(BudgetViewModel.class);
-        model.getPlacesByBudget(budget,activitiesList.toArray(new String[0]));
         model.getPlacesObject().observe(getViewLifecycleOwner(),listoflists -> {
             // update ur ui hna
 
         });
+        model.getPlacesByBudget(budget,activitiesList.toArray(new String[0]));
 
        binding.chip1.setOnClickListener(new View.OnClickListener() {
            @Override
