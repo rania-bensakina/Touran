@@ -9,6 +9,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.google.android.material.chip.Chip;
+import com.r2a.touran.data.Place;
 import com.r2a.touran.databinding.BudgetFragmentBinding;
 import com.r2a.touran.databinding.HomeFragmentBinding;
 import com.r2a.touran.viewmodels.BudgetViewModel;
@@ -27,7 +29,7 @@ public class BudgetFragment extends Fragment {
 
     private BudgetViewModel mViewModel;
 int numberOfDays,numberOfPersons,budget;
-ArrayList<String> activitiesList = new ArrayList<String>();
+ArrayList<String> activitiesList = new ArrayList<>();
     public static BudgetFragment newInstance() {
         return new BudgetFragment();
     }
@@ -38,6 +40,13 @@ ArrayList<String> activitiesList = new ArrayList<String>();
         BudgetFragmentBinding binding = DataBindingUtil.inflate(
                 inflater, R.layout.budget_fragment, container, false);
         View view = binding.getRoot();
+        BudgetViewModel model =ViewModelProviders.of(this).get(BudgetViewModel.class);
+        model.getPlacesByBudget(budget,activitiesList.toArray(new String[0]));
+        model.getPlacesObject().observe(getViewLifecycleOwner(),listoflists -> {
+            // update ur ui hna
+
+        });
+
        binding.chip1.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
