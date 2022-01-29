@@ -71,7 +71,6 @@
                 android:layout_gravity="start"
                 android:layout_marginStart="24dp"
                 android:layout_weight="1"
-                android:drawableLeft="@drawable/place"
                 android:fontFamily="@font/medium"
                 android:gravity="center_vertical"
                 android:text="Amritsar"

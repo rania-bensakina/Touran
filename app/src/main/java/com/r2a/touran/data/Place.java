@@ -6,6 +6,7 @@ package com.r2a.touran.data;
 
 public class Place {
 
+    private Long id;
     private String name;
     private Double longitude;
     private Double latitude;
@@ -120,6 +121,14 @@ public class Place {
 
     public enum PlaceType {
         CULTURE, NOURRITURE, DIVERTISSEMENT, NATURE, SHOPPING
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @Override

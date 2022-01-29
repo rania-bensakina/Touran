@@ -23,6 +23,7 @@ import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.transition.TransitionInflater;
 import android.util.Log;
+import android.view.View;
 import android.view.animation.Animation;
 import android.widget.Toast;
 
@@ -35,18 +36,28 @@ import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.r2a.touran.BuildConfig;
 import com.r2a.touran.R;
 import com.r2a.touran.data.Place;
 import com.r2a.touran.databinding.PlaceInfoActivityBinding;
+import com.r2a.touran.service.PlaceService;
 import com.squareup.picasso.Picasso;
 
 import java.util.TimeZone;
+
+import okhttp3.OkHttpClient;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class PlaceInfoActivity extends AppCompatActivity implements OnMapReadyCallback {
     GoogleMap map;
     Place place;
     Double longitude, latitude;
+    Long id;
     String name;
     String imglink;
     private boolean locationPermissionGranted;
@@ -54,6 +65,13 @@ public class PlaceInfoActivity extends AppCompatActivity implements OnMapReadyCa
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
 
     PlaceInfoActivityBinding binding;
+    OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+    Retrofit retrofit = new Retrofit.Builder()
+            .baseUrl(BuildConfig.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(httpClient.build())
+            .build();
+    PlaceService service = retrofit.create(PlaceService.class);
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -63,6 +81,7 @@ public class PlaceInfoActivity extends AppCompatActivity implements OnMapReadyCa
         if (this.getIntent() != null) {
             Bundle extras = this.getIntent().getExtras();
             name = extras.getString("name");
+            id = extras.getLong("id");
             binding.name.setText(name);
             String description = extras.getString("description");
             binding.description.setText(description);
@@ -71,6 +90,45 @@ public class PlaceInfoActivity extends AppCompatActivity implements OnMapReadyCa
             System.out.println(extras.getDouble("rank"));
             longitude = extras.getDouble("longitude");
             latitude = extras.getDouble("latitude");
+            final boolean[] itemliked = {extras.getBoolean("liked")};
+            if(itemliked[0]){
+                binding.loveplace.setImageResource(R.drawable.ic_heart_filled);
+            }else                         binding.loveplace.setImageResource(R.drawable.ic_heart);
+            binding.loveplace.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (!itemliked[0]) {
+                        itemliked[0] = true;
+                        binding.loveplace.setImageResource(R.drawable.ic_heart_filled);
+                        Call<Void> mycall = service.likeAPlace(id, "LIKE");
+                        mycall.enqueue(new Callback<Void>() {
+                            @Override
+                            public void onResponse(Call<Void> call, Response<Void> response) {
+                            }
+
+                            @Override
+                            public void onFailure(Call<Void> call, Throwable t) {
+                                Log.i("failed", "onFailure: ", t.fillInStackTrace());
+                                binding.loveplace.setImageResource(R.drawable.ic_heart);
+                            }
+                        });
+                    } else {
+                        itemliked[0] = false;
+                        binding.loveplace.setImageResource(R.drawable.ic_heart);
+                        Call<Void> mycall = service.likeAPlace(id, "DISLIKE");
+                        mycall.enqueue(new Callback<Void>() {
+                            @Override
+                            public void onResponse(Call<Void> call, Response<Void> response) {
+                            }
+
+                            @Override
+                            public void onFailure(Call<Void> call, Throwable t) {
+                                Log.i("failed", "onFailure: ", t.fillInStackTrace());
+                                binding.loveplace.setImageResource(R.drawable.ic_heart_filled);
+                            }
+                        });
+                    }
+                }});
             Picasso.get().load(extras.getString("imglink")).fit().into(binding.placeImage);
             SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.maplace);
             if (mapFragment != null) {
