@@ -26,7 +26,6 @@
             android:layout_below="@+id/toolbar" />
 
 
-
         <nl.joery.animatedbottombar.AnimatedBottomBar
             android:id="@+id/bottom_bar"
             android:layout_width="match_parent"
@@ -49,4 +48,5 @@
             app:abb_textAppearance="@style/CustomText" />
     </RelativeLayout>
 </layout>
+
 

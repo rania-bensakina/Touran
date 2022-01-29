@@ -15,6 +15,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
 import com.r2a.touran.R;
+import com.r2a.touran.databinding.ActivtyHome2Binding;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -22,7 +23,7 @@ import org.jetbrains.annotations.Nullable;
 import nl.joery.animatedbottombar.AnimatedBottomBar;
 
 public class HomeActivity extends AppCompatActivity {
-    ActivtyHome2Binding binding ;
+ActivtyHome2Binding binding ;
     Fragment lastFragment;
 
   @Override
