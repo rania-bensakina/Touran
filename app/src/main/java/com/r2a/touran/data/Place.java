@@ -1,10 +1,10 @@
 package com.r2a.touran.data;
 
 
+import android.os.Parcel;
+import android.os.Parcelable;
 
-
-
-public class Place {
+public class Place implements Parcelable {
 
     private Long id;
     private String name;
@@ -15,6 +15,42 @@ public class Place {
     private Point location;
     private double rate;
     private String imglink;
+
+    protected Place(Parcel in) {
+        if (in.readByte() == 0) {
+            id = null;
+        } else {
+            id = in.readLong();
+        }
+        name = in.readString();
+        if (in.readByte() == 0) {
+            longitude = null;
+        } else {
+            longitude = in.readDouble();
+        }
+        if (in.readByte() == 0) {
+            latitude = null;
+        } else {
+            latitude = in.readDouble();
+        }
+        startingprice = in.readDouble();
+        type = in.readString();
+        rate = in.readDouble();
+        imglink = in.readString();
+        description = in.readString();
+    }
+
+    public static final Creator<Place> CREATOR = new Creator<Place>() {
+        @Override
+        public Place createFromParcel(Parcel in) {
+            return new Place(in);
+        }
+
+        @Override
+        public Place[] newArray(int size) {
+            return new Place[size];
+        }
+    };
 
     public Point getLocation() {
         return location;
@@ -118,6 +154,39 @@ public class Place {
     }
 
     private String description;
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        if (id == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeLong(id);
+        }
+        parcel.writeString(name);
+        if (longitude == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeDouble(longitude);
+        }
+        if (latitude == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeDouble(latitude);
+        }
+        parcel.writeDouble(startingprice);
+        parcel.writeString(type);
+        parcel.writeDouble(rate);
+        parcel.writeString(imglink);
+        parcel.writeString(description);
+    }
 
     public enum PlaceType {
         CULTURE, NOURRITURE, DIVERTISSEMENT, NATURE, SHOPPING

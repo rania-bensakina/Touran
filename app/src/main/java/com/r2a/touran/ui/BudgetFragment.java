@@ -25,7 +25,8 @@ import java.util.List;
 
 public class BudgetFragment extends Fragment {
     List<List<Place>> suggestedPlaces;
-    int numberOfDays, numberOfPersons, budget;
+    int numberOfDays, budget;
+    int numberOfPersons = 1;
     ArrayList<String> activitiesList = new ArrayList<>();
 
     public static BudgetFragment newInstance() {
@@ -94,14 +95,14 @@ public class BudgetFragment extends Fragment {
                 budget = Integer.parseInt(binding.budget.getText().toString()) / numberOfPersons;
                 model.getPlacesObject().observe(getViewLifecycleOwner(), listoflists -> {
                     Toast.makeText(getContext(), "Inside", Toast.LENGTH_SHORT).show();
-                    suggestedPlaces = (List<List<Place>>) listoflists;
+                    suggestedPlaces = listoflists;
                     System.out.println(suggestedPlaces);
                     Intent intent = new Intent(getActivity(), SuggestedPlacesActivity.class);
+                    intent.putExtra("bigListSize",suggestedPlaces.size());
                     for (int i = 0; i < suggestedPlaces.size(); i++) {
-                        intent.putParcelableArrayListExtra("list", (ArrayList<? extends Parcelable>) suggestedPlaces.get(i));
-
+                        intent.putParcelableArrayListExtra("list"+i, new ArrayList<>(suggestedPlaces.get(i)));
                     }
-
+                    startActivity(intent);
             /*        intent.putExtra("name", myplace.getName());
                     intent.putExtra("imglink",myplace.getImglink());
                     intent.putExtra("description", myplace.getDescription());
@@ -111,6 +112,7 @@ public class BudgetFragment extends Fragment {
                     intent.putExtra("imglink",myplace.getImglink());
                     startActivity(intent);*/
                 });
+                model.getPlacesByBudget(budget,activitiesList.toArray(new String[0]));
 
             }
         });

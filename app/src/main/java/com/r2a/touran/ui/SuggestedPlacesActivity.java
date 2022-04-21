@@ -29,7 +29,10 @@ ActivitySuggestedPlacesBinding binding;
         binding = DataBindingUtil.setContentView(this, R.layout.activity_suggested_places);
         if (this.getIntent() != null) {
             Bundle extras = this.getIntent().getExtras();
-
+            int count = extras.getInt("bigListSize");
+            for(int i=0;i<count;i++){
+                mylist.add(extras.getParcelableArrayList("list"+i));
+            }
 
     }
         RecyclerViewLayoutManager
